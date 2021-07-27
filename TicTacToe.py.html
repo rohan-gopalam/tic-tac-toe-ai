@@ -1,0 +1,257 @@
+<html>
+<head>
+<title>TicTacToe.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+TicTacToe.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">tkinter</span>
+<span class="s0">import </span><span class="s1">tkinter.font </span><span class="s0">as </span><span class="s1">font</span>
+
+
+<span class="s0">def </span><span class="s1">postob(i</span><span class="s0">, </span><span class="s1">j):</span>
+    <span class="s0">global </span><span class="s1">b1</span><span class="s0">, </span><span class="s1">b2</span><span class="s0">, </span><span class="s1">b3</span><span class="s0">, </span><span class="s1">b4</span><span class="s0">, </span><span class="s1">b5</span><span class="s0">, </span><span class="s1">b6</span><span class="s0">, </span><span class="s1">b7</span><span class="s0">, </span><span class="s1">b8</span><span class="s0">, </span><span class="s1">b9</span>
+    <span class="s0">if </span><span class="s1">i == </span><span class="s2">0 </span><span class="s0">and </span><span class="s1">j == </span><span class="s2">0</span><span class="s1">:</span>
+        <span class="s1">b1[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;O&quot;</span>
+
+    <span class="s0">if </span><span class="s1">i == </span><span class="s2">0 </span><span class="s0">and </span><span class="s1">j == </span><span class="s2">1</span><span class="s1">:</span>
+        <span class="s1">b2[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;O&quot;</span>
+
+    <span class="s0">if </span><span class="s1">i == </span><span class="s2">0 </span><span class="s0">and </span><span class="s1">j == </span><span class="s2">2</span><span class="s1">:</span>
+        <span class="s1">b3[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;O&quot;</span>
+
+    <span class="s0">if </span><span class="s1">i == </span><span class="s2">1 </span><span class="s0">and </span><span class="s1">j == </span><span class="s2">0</span><span class="s1">:</span>
+        <span class="s1">b4[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;O&quot;</span>
+
+    <span class="s0">if </span><span class="s1">i == </span><span class="s2">1 </span><span class="s0">and </span><span class="s1">j == </span><span class="s2">1</span><span class="s1">:</span>
+        <span class="s1">b5[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;O&quot;</span>
+
+    <span class="s0">if </span><span class="s1">i == </span><span class="s2">1 </span><span class="s0">and </span><span class="s1">j == </span><span class="s2">2</span><span class="s1">:</span>
+        <span class="s1">b6[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;O&quot;</span>
+
+    <span class="s0">if </span><span class="s1">i == </span><span class="s2">2 </span><span class="s0">and </span><span class="s1">j == </span><span class="s2">0</span><span class="s1">:</span>
+        <span class="s1">b7[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;O&quot;</span>
+
+    <span class="s0">if </span><span class="s1">i == </span><span class="s2">2 </span><span class="s0">and </span><span class="s1">j == </span><span class="s2">1</span><span class="s1">:</span>
+        <span class="s1">b8[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;O&quot;</span>
+
+    <span class="s0">if </span><span class="s1">i == </span><span class="s2">2 </span><span class="s0">and </span><span class="s1">j == </span><span class="s2">2</span><span class="s1">:</span>
+        <span class="s1">b9[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;O&quot;</span>
+
+
+<span class="s0">def </span><span class="s1">minimax(arr</span><span class="s0">, </span><span class="s1">isMax):</span>
+    <span class="s1">bestScore = </span><span class="s2">0</span>
+    <span class="s1">bestMoveO = [</span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s1">]</span>
+    <span class="s1">bestMoveX = [</span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s1">]</span>
+    <span class="s1">scoreVal = {</span><span class="s3">&quot;X&quot;</span><span class="s1">: -</span><span class="s2">1</span><span class="s0">, </span><span class="s3">&quot;O&quot;</span><span class="s1">: </span><span class="s2">1</span><span class="s0">, </span><span class="s3">&quot;TIE&quot;</span><span class="s1">: </span><span class="s2">0</span><span class="s1">}</span>
+
+    <span class="s1">vals = checkWin(arr)</span>
+    <span class="s1">win = vals[</span><span class="s2">0</span><span class="s1">]</span>
+    <span class="s1">winner = vals[</span><span class="s2">1</span><span class="s1">]</span>
+
+    <span class="s0">if </span><span class="s1">win:</span>
+        <span class="s1">score = scoreVal.get(winner)</span>
+        <span class="s0">if </span><span class="s1">isMax:</span>
+            <span class="s1">bestScore = -</span><span class="s2">2</span>
+            <span class="s0">if </span><span class="s1">bestScore &lt;= score:</span>
+                <span class="s1">bestScore = score</span>
+            <span class="s0">return </span><span class="s1">bestScore</span><span class="s0">,</span>
+        <span class="s0">else</span><span class="s1">:</span>
+            <span class="s1">score = scoreVal.get(winner)</span>
+            <span class="s1">bestScore = </span><span class="s2">2</span>
+            <span class="s0">if </span><span class="s1">bestScore &gt;= score:</span>
+                <span class="s1">bestScore = score</span>
+            <span class="s0">return </span><span class="s1">bestScore</span><span class="s0">,</span>
+
+    <span class="s0">if not </span><span class="s1">win:</span>
+
+        <span class="s0">if </span><span class="s1">isMax:</span>
+            <span class="s1">bestScore = -</span><span class="s2">2</span>
+            <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range(</span><span class="s2">3</span><span class="s1">):</span>
+                <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s1">range(</span><span class="s2">3</span><span class="s1">):</span>
+                    <span class="s0">if </span><span class="s1">arr[i][j] == </span><span class="s3">&quot;&quot;</span><span class="s1">:</span>
+                        <span class="s1">arr[i][j] = </span><span class="s3">&quot;O&quot;</span>
+                        <span class="s1">findNextBest = minimax(arr</span><span class="s0">, False</span><span class="s1">)</span>
+                        <span class="s1">arr[i][j] = </span><span class="s3">&quot;&quot;</span>
+                        <span class="s0">if </span><span class="s1">findNextBest[</span><span class="s2">0</span><span class="s1">] &gt; bestScore:</span>
+                            <span class="s1">bestScore = findNextBest[</span><span class="s2">0</span><span class="s1">]</span>
+
+            <span class="s0">return </span><span class="s1">bestScore</span><span class="s0">,</span>
+
+        <span class="s0">else</span><span class="s1">:</span>
+            <span class="s1">bestScore = </span><span class="s2">2</span>
+            <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range(</span><span class="s2">3</span><span class="s1">):</span>
+                <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s1">range(</span><span class="s2">3</span><span class="s1">):</span>
+                    <span class="s0">if </span><span class="s1">arr[i][j] == </span><span class="s3">&quot;&quot;</span><span class="s1">:</span>
+                        <span class="s1">arr[i][j] = </span><span class="s3">&quot;X&quot;</span>
+                        <span class="s1">findNextBest = minimax(arr</span><span class="s0">, True</span><span class="s1">)</span>
+                        <span class="s1">arr[i][j] = </span><span class="s3">&quot;&quot;</span>
+                        <span class="s0">if </span><span class="s1">findNextBest[</span><span class="s2">0</span><span class="s1">] &lt; bestScore:</span>
+                            <span class="s1">bestScore = findNextBest[</span><span class="s2">0</span><span class="s1">]</span>
+
+            <span class="s0">return </span><span class="s1">bestScore</span><span class="s0">,</span>
+
+
+<span class="s0">def </span><span class="s1">aimove():</span>
+    <span class="s1">scenario = positions</span>
+
+    <span class="s1">bestScore = -</span><span class="s2">2</span>
+    <span class="s1">bestMoveO = [</span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s1">]</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range(</span><span class="s2">3</span><span class="s1">):</span>
+        <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s1">range(</span><span class="s2">3</span><span class="s1">):</span>
+            <span class="s0">if </span><span class="s1">scenario[i][j] == </span><span class="s3">&quot;&quot;</span><span class="s1">:</span>
+                <span class="s1">scenario[i][j] = </span><span class="s3">&quot;O&quot;</span>
+                <span class="s1">findNextBest = minimax(scenario</span><span class="s0">, False</span><span class="s1">)</span>
+                <span class="s1">scenario[i][j] = </span><span class="s3">&quot;&quot;</span>
+                <span class="s0">if </span><span class="s1">findNextBest[</span><span class="s2">0</span><span class="s1">] &gt; bestScore:</span>
+                    <span class="s1">bestScore = findNextBest[</span><span class="s2">0</span><span class="s1">]</span>
+                    <span class="s1">bestMoveO = [i</span><span class="s0">, </span><span class="s1">j]</span>
+    <span class="s1">positions[bestMoveO[</span><span class="s2">0</span><span class="s1">]][bestMoveO[</span><span class="s2">1</span><span class="s1">]] = </span><span class="s3">&quot;O&quot;</span>
+    <span class="s1">postob(bestMoveO[</span><span class="s2">0</span><span class="s1">]</span><span class="s0">, </span><span class="s1">bestMoveO[</span><span class="s2">1</span><span class="s1">])</span>
+
+
+<span class="s0">def </span><span class="s1">buttonclick(b</span><span class="s0">, </span><span class="s1">i</span><span class="s0">, </span><span class="s1">j):</span>
+    <span class="s0">global </span><span class="s1">positions</span>
+    <span class="s1">vals = checkWin(positions)</span>
+    <span class="s1">win = vals[</span><span class="s2">0</span><span class="s1">]</span>
+    <span class="s0">if not </span><span class="s1">win:</span>
+        <span class="s0">if </span><span class="s1">positions[i][j] == </span><span class="s3">&quot;&quot;</span><span class="s1">:</span>
+            <span class="s1">b[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;X&quot;</span>
+            <span class="s1">positions[i][j] = </span><span class="s3">&quot;X&quot;</span>
+            <span class="s1">checker = checkWin(positions)</span>
+            <span class="s0">if not </span><span class="s1">checker[</span><span class="s2">0</span><span class="s1">]:</span>
+                <span class="s1">aimove()</span>
+    <span class="s1">valsTwo = checkWin(positions)</span>
+    <span class="s1">winTwo = valsTwo[</span><span class="s2">0</span><span class="s1">]</span>
+    <span class="s1">winnerTwo = valsTwo[</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s0">if </span><span class="s1">winTwo:</span>
+        <span class="s1">print(winnerTwo + </span><span class="s3">&quot; wins&quot;</span><span class="s1">)</span>
+
+
+<span class="s0">def </span><span class="s1">resetclick():</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range(</span><span class="s2">3</span><span class="s1">):</span>
+        <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s1">range(</span><span class="s2">3</span><span class="s1">):</span>
+            <span class="s1">positions[i][j] = </span><span class="s3">&quot;&quot;</span>
+    <span class="s1">b1[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;&quot;</span>
+    <span class="s1">b2[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;&quot;</span>
+    <span class="s1">b3[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;&quot;</span>
+    <span class="s1">b4[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;&quot;</span>
+    <span class="s1">b5[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;&quot;</span>
+    <span class="s1">b6[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;&quot;</span>
+    <span class="s1">b7[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;&quot;</span>
+    <span class="s1">b8[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;&quot;</span>
+    <span class="s1">b9[</span><span class="s3">'text'</span><span class="s1">] = </span><span class="s3">&quot;&quot;</span>
+
+
+<span class="s0">def </span><span class="s1">checkWin(pos):</span>
+    <span class="s1">win = </span><span class="s0">False</span>
+    <span class="s1">winner = </span><span class="s3">&quot;&quot;</span>
+
+    <span class="s1">counter = </span><span class="s2">0</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range(</span><span class="s2">3</span><span class="s1">):</span>
+        <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s1">range(</span><span class="s2">3</span><span class="s1">):</span>
+            <span class="s0">if </span><span class="s1">pos[i][j] == </span><span class="s3">&quot;&quot;</span><span class="s1">:</span>
+                <span class="s1">counter += </span><span class="s2">1</span>
+    <span class="s0">if </span><span class="s1">counter == </span><span class="s2">0</span><span class="s1">:</span>
+        <span class="s1">win = </span><span class="s0">True</span>
+        <span class="s1">winner = </span><span class="s3">&quot;TIE&quot;</span>
+
+    <span class="s1">sides = [</span><span class="s3">&quot;X&quot;</span><span class="s0">, </span><span class="s3">&quot;O&quot;</span><span class="s1">]</span>
+    <span class="s0">for </span><span class="s1">side </span><span class="s0">in </span><span class="s1">sides:</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range(</span><span class="s2">3</span><span class="s1">):</span>
+            <span class="s0">if </span><span class="s1">(pos[i][</span><span class="s2">0</span><span class="s1">] == side </span><span class="s0">and </span><span class="s1">pos[i][</span><span class="s2">1</span><span class="s1">] == side </span><span class="s0">and </span><span class="s1">pos[i][</span><span class="s2">2</span><span class="s1">] == side) </span><span class="s0">or </span><span class="s1">(</span>
+                    <span class="s1">pos[</span><span class="s2">0</span><span class="s1">][i] == side </span><span class="s0">and </span><span class="s1">pos[</span><span class="s2">1</span><span class="s1">][i] == side </span><span class="s0">and </span><span class="s1">pos[</span><span class="s2">2</span><span class="s1">][i] == side):</span>
+                <span class="s1">win = </span><span class="s0">True</span>
+                <span class="s1">winner = side</span>
+
+        <span class="s0">if </span><span class="s1">(pos[</span><span class="s2">0</span><span class="s1">][</span><span class="s2">0</span><span class="s1">] == side </span><span class="s0">and </span><span class="s1">pos[</span><span class="s2">1</span><span class="s1">][</span><span class="s2">1</span><span class="s1">] == side </span><span class="s0">and </span><span class="s1">pos[</span><span class="s2">2</span><span class="s1">][</span><span class="s2">2</span><span class="s1">] == side) </span><span class="s0">or </span><span class="s1">(</span>
+                <span class="s1">pos[</span><span class="s2">0</span><span class="s1">][</span><span class="s2">2</span><span class="s1">] == side </span><span class="s0">and </span><span class="s1">pos[</span><span class="s2">1</span><span class="s1">][</span><span class="s2">1</span><span class="s1">] == side </span><span class="s0">and </span><span class="s1">pos[</span><span class="s2">2</span><span class="s1">][</span><span class="s2">0</span><span class="s1">] == side):</span>
+            <span class="s1">win = </span><span class="s0">True</span>
+            <span class="s1">winner = side</span>
+
+    <span class="s0">return </span><span class="s1">win</span><span class="s0">, </span><span class="s1">winner</span>
+
+
+<span class="s1">root = tkinter.Tk()</span>
+<span class="s1">root.title(</span><span class="s3">&quot;AI TicTacToe&quot;</span><span class="s1">)</span>
+<span class="s1">titleLab = tkinter.Label(root</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot;Welcome to AI TicTacToe&quot;</span><span class="s1">)</span>
+<span class="s1">titleLab.grid(row=</span><span class="s2">1</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">0</span><span class="s1">)</span>
+<span class="s1">shapeLab = tkinter.Label(root</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot;You are X&quot;</span><span class="s1">)</span>
+<span class="s1">shapeLab.grid(row=</span><span class="s2">2</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">0</span><span class="s1">)</span>
+
+<span class="s1">myFont = font.Font(size=</span><span class="s2">10</span><span class="s1">)</span>
+
+<span class="s1">rightFrame = tkinter.Frame(root)</span>
+<span class="s1">rightFrame.grid(row=</span><span class="s2">2</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">0</span><span class="s0">, </span><span class="s1">sticky=</span><span class="s3">'n'</span><span class="s1">)</span>
+<span class="s1">resetFrame = tkinter.Frame(root)</span>
+<span class="s1">resetFrame.grid(row=</span><span class="s2">3</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">0</span><span class="s0">, </span><span class="s1">sticky=</span><span class="s3">'n'</span><span class="s1">)</span>
+
+<span class="s1">positions = [[</span><span class="s3">&quot;&quot;</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s1">]</span><span class="s0">, </span><span class="s1">[</span><span class="s3">&quot;&quot;</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s1">]</span><span class="s0">, </span><span class="s1">[</span><span class="s3">&quot;&quot;</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s0">, </span><span class="s3">&quot;&quot;</span><span class="s1">]]</span>
+<span class="s4"># positions = [[&quot;X&quot;, &quot;O&quot;, &quot;X&quot;], [&quot;O&quot;, &quot;O&quot;, &quot;&quot;], [&quot;&quot;, &quot;X&quot;, &quot;&quot;]]</span>
+
+<span class="s1">reset = tkinter.Button(resetFrame</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot;reset&quot;</span><span class="s0">, </span><span class="s1">padx=</span><span class="s2">20</span><span class="s0">, </span><span class="s1">pady=</span><span class="s2">30</span><span class="s0">, </span><span class="s1">command=</span><span class="s0">lambda</span><span class="s1">: resetclick())</span>
+<span class="s1">reset.grid(row=</span><span class="s2">1</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">1</span><span class="s1">)</span>
+
+<span class="s4"># BUTTON1</span>
+<span class="s1">b1 = tkinter.Button(rightFrame</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot; &quot;</span><span class="s0">, </span><span class="s1">padx=</span><span class="s2">20</span><span class="s0">, </span><span class="s1">pady=</span><span class="s2">30</span><span class="s0">, </span><span class="s1">command=</span><span class="s0">lambda</span><span class="s1">: buttonclick(b1</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s1">))</span>
+<span class="s1">b1.grid(row=</span><span class="s2">0</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">0</span><span class="s1">)</span>
+
+<span class="s4"># BUTTON2</span>
+<span class="s1">b2 = tkinter.Button(rightFrame</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot; &quot;</span><span class="s0">, </span><span class="s1">padx=</span><span class="s2">20</span><span class="s0">, </span><span class="s1">pady=</span><span class="s2">30</span><span class="s0">, </span><span class="s1">command=</span><span class="s0">lambda</span><span class="s1">: buttonclick(b2</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">1</span><span class="s1">))</span>
+<span class="s1">b2.grid(row=</span><span class="s2">0</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">1</span><span class="s1">)</span>
+
+<span class="s4"># BUTTON3</span>
+<span class="s1">b3 = tkinter.Button(rightFrame</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot; &quot;</span><span class="s0">, </span><span class="s1">padx=</span><span class="s2">20</span><span class="s0">, </span><span class="s1">pady=</span><span class="s2">30</span><span class="s0">, </span><span class="s1">command=</span><span class="s0">lambda</span><span class="s1">: buttonclick(b3</span><span class="s0">, </span><span class="s2">0</span><span class="s0">, </span><span class="s2">2</span><span class="s1">))</span>
+<span class="s1">b3.grid(row=</span><span class="s2">0</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">2</span><span class="s1">)</span>
+
+<span class="s4"># BUTTON4</span>
+<span class="s1">b4 = tkinter.Button(rightFrame</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot; &quot;</span><span class="s0">, </span><span class="s1">padx=</span><span class="s2">20</span><span class="s0">, </span><span class="s1">pady=</span><span class="s2">30</span><span class="s0">, </span><span class="s1">command=</span><span class="s0">lambda</span><span class="s1">: buttonclick(b4</span><span class="s0">, </span><span class="s2">1</span><span class="s0">, </span><span class="s2">0</span><span class="s1">))</span>
+<span class="s1">b4.grid(row=</span><span class="s2">1</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">0</span><span class="s1">)</span>
+
+<span class="s4"># BUTTON5</span>
+<span class="s1">b5 = tkinter.Button(rightFrame</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot; &quot;</span><span class="s0">, </span><span class="s1">padx=</span><span class="s2">20</span><span class="s0">, </span><span class="s1">pady=</span><span class="s2">30</span><span class="s0">, </span><span class="s1">command=</span><span class="s0">lambda</span><span class="s1">: buttonclick(b5</span><span class="s0">, </span><span class="s2">1</span><span class="s0">, </span><span class="s2">1</span><span class="s1">))</span>
+<span class="s1">b5.grid(row=</span><span class="s2">1</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">1</span><span class="s1">)</span>
+
+<span class="s4"># BUTTON6</span>
+<span class="s1">b6 = tkinter.Button(rightFrame</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot; &quot;</span><span class="s0">, </span><span class="s1">padx=</span><span class="s2">20</span><span class="s0">, </span><span class="s1">pady=</span><span class="s2">30</span><span class="s0">, </span><span class="s1">command=</span><span class="s0">lambda</span><span class="s1">: buttonclick(b6</span><span class="s0">, </span><span class="s2">1</span><span class="s0">, </span><span class="s2">2</span><span class="s1">))</span>
+<span class="s1">b6.grid(row=</span><span class="s2">1</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">2</span><span class="s1">)</span>
+
+<span class="s4"># BUTTON7</span>
+<span class="s1">b7 = tkinter.Button(rightFrame</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot; &quot;</span><span class="s0">, </span><span class="s1">padx=</span><span class="s2">20</span><span class="s0">, </span><span class="s1">pady=</span><span class="s2">30</span><span class="s0">, </span><span class="s1">command=</span><span class="s0">lambda</span><span class="s1">: buttonclick(b7</span><span class="s0">, </span><span class="s2">2</span><span class="s0">, </span><span class="s2">0</span><span class="s1">))</span>
+<span class="s1">b7.grid(row=</span><span class="s2">2</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">0</span><span class="s1">)</span>
+
+<span class="s4"># BUTTON8</span>
+
+<span class="s1">b8 = tkinter.Button(rightFrame</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot; &quot;</span><span class="s0">, </span><span class="s1">padx=</span><span class="s2">20</span><span class="s0">, </span><span class="s1">pady=</span><span class="s2">30</span><span class="s0">, </span><span class="s1">command=</span><span class="s0">lambda</span><span class="s1">: buttonclick(b8</span><span class="s0">, </span><span class="s2">2</span><span class="s0">, </span><span class="s2">1</span><span class="s1">))</span>
+<span class="s1">b8.grid(row=</span><span class="s2">2</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">1</span><span class="s1">)</span>
+
+<span class="s4"># BUTTON9</span>
+
+<span class="s1">b9 = tkinter.Button(rightFrame</span><span class="s0">, </span><span class="s1">text=</span><span class="s3">&quot; &quot;</span><span class="s0">, </span><span class="s1">padx=</span><span class="s2">20</span><span class="s0">, </span><span class="s1">pady=</span><span class="s2">30</span><span class="s0">, </span><span class="s1">command=</span><span class="s0">lambda</span><span class="s1">: buttonclick(b9</span><span class="s0">, </span><span class="s2">2</span><span class="s0">, </span><span class="s2">2</span><span class="s1">))</span>
+<span class="s1">b9.grid(row=</span><span class="s2">2</span><span class="s0">, </span><span class="s1">column=</span><span class="s2">2</span><span class="s1">)</span>
+
+<span class="s1">root.mainloop()</span>
+
+<span class="s4"># button_text = tkinter.StringVar()</span>
+<span class="s4"># button = tkinter.Button(root, textvariable=button_text, command=update_button_text)</span>
+<span class="s4"># button_text.set(&quot;a&quot;)</span>
+<span class="s4">##</span>
+
+<span class="s4"># BUTTON1</span>
+
+
+<span class="s1">print(positions)</span>
+</pre>
+</body>
+</html>
